@@ -5,7 +5,9 @@ function App() {
     return (
      /* A Fragment is used to render more than one component */ 
     <>
-      <Banner/>
+      <Banner>
+        <div>Providing houses all over the world</div>
+      </Banner>
     </>
   )
 }
