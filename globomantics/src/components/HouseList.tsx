@@ -1,5 +1,5 @@
-import { useState } from "react";
-import HouseRow, { HouseRowMem } from "./HouseRow";
+import { useEffect, useState } from "react";
+import HouseRow from "./HouseRow";
 
 export interface House {
     id: number;
@@ -8,28 +8,22 @@ export interface House {
     price: number;
 };
 
-const housesArray: House [] = [
-    {
-        id: 1,
-        address: "12 Valley of Kings, Geneva",
-        country: "Switzerland",
-        price: 900000
-    },
-    {
-        id: 2,
-        address: "89 Road of Forks, Bern",
-        country: "Switzerland",
-        price: 500000
-    }    
-];
-
 const HouseList = () => {
     /**
      * Using the useState hook (a function).
      * Its first parameter is the initial value of the state.
      * useState returns an array
      */
-    const [houses, setHouses] = useState(housesArray);
+    const [houses, setHouses] = useState<House[]>([]);
+
+    useEffect(() => {
+        const fetchHouses = async () => {
+            const response: Response = await fetch("https://localhost:4000/house");
+            const houses = (await response).json();
+            setHouses(await houses);
+        };
+        fetchHouses();
+    });
 
     const addHouse = () => {
         setHouses([
