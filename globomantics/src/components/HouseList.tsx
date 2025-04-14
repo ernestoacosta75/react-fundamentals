@@ -1,5 +1,5 @@
 import { useState } from "react";
-import HouseRow from "./HouseRow";
+import HouseRow, { HouseRowMem } from "./HouseRow";
 
 export interface House {
     id: number;
