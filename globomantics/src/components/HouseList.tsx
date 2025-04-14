@@ -1,3 +1,4 @@
+import { useState } from "react";
 import HouseRow from "./HouseRow";
 
 export interface House {
@@ -7,7 +8,7 @@ export interface House {
     price: number;
 };
 
-const houses: House [] = [
+const housesArray: House [] = [
     {
         id: 1,
         address: "12 Valley of Kings, Geneva",
@@ -23,6 +24,25 @@ const houses: House [] = [
 ];
 
 const HouseList = () => {
+    /**
+     * Using the useState hook (a function).
+     * Its first parameter is the initial value of the state.
+     * useState returns an array
+     */
+    const [houses, setHouses] = useState(housesArray);
+
+    const addHouse = () => {
+        setHouses([
+            ...houses,
+            {
+                id: 6,
+                address: "32 Valley Way, New York",
+                country: "USA",
+                price: 1000000
+            }
+        ]);
+    };
+
     return (
         <>
             <div className="row mb-2">
@@ -42,6 +62,7 @@ const HouseList = () => {
                     {houses.map(h => <HouseRow key={h.id} house={h}/>)}
                 </tbody>
             </table>
+            <button className="btn btn-primary" onClick={addHouse}>Add</button>
         </>
     );
 };
