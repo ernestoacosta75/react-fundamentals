@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from "react";
-import HouseRow from "./HouseRow";
+import HouseRow from "./house-row/HouseRow";
 import AddHouseButton from "./AddHouseButton";
 
 export interface House {
-    id: number;
+    id?: number;
     address: string;
     country: string;
     price: number;
+    photo?: string;
+    description?: string;
 };
 
 const HouseList = () => {
@@ -88,7 +90,6 @@ const HouseList = () => {
                 </tbody>
             </table>
             <AddHouseButton onAddHouse={addHouse}/>
-            {/* <button className="btn btn-primary" onClick={addHouse}>Add</button> */}
         </>
     );
 };

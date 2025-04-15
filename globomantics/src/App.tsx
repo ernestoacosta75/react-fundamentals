@@ -1,6 +1,6 @@
 import './App.css'
-import Banner from './components/Banner'
-import HouseList from './components/HouseList'
+import Banner from './components/banner/Banner'
+import HouseList from './components/house-list/HouseList'
 
 function App() {
     return (

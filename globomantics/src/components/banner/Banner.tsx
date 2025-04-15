@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import logo from '../assets/GloboLogo.png';
+import logo from '../../assets/GloboLogo.png';
 import styles from './Banner.module.css';
 
 interface BannerProps {
