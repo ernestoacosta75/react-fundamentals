@@ -32,3 +32,5 @@ const House = ({house}: HouseProps) => {
         </div>
     );
 };
+
+export default House;
