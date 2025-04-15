@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import HouseRow from "./HouseRow";
 import AddHouseButton from "./AddHouseButton";
 
@@ -16,6 +16,8 @@ const HouseList = () => {
      * useState returns an array
      */
     const [houses, setHouses] = useState<House[]>([]);
+    
+    const counter = useRef(0);
 
     /**
      * This effect runs only once when the component mounts (because of the empty [] dependency array).
@@ -29,6 +31,10 @@ const HouseList = () => {
             setHouses(await houses);
         };
         fetchHouses();
+        
+        // When a reference type is passed to useRef, the ref hook guarantees that
+        // the same reference is returned in the current property across re-renders.
+        counter.current++;
     }, []);
 
     /**
