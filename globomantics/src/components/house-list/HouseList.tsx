@@ -1,6 +1,8 @@
 import HouseRow from "./house-row/HouseRow";
 import AddHouseButton from "./AddHouseButton";
 import useHouses from "../../hooks/useHouses";
+import LoadingIndicator from "../loaders/LoadingIndicator";
+import loadingStatus from "../../helpers/loadingStatus";
 
 export interface House {
     id?: number;
@@ -20,7 +22,11 @@ export interface HouseListProps {
 
 const HouseList = ({selectHouse}: HouseListProps) => {
 
-    const {houses, setHouses} = useHouses();
+    const {houses, setHouses, loadingState } = useHouses();
+
+    if (loadingState !== loadingStatus.loaded) {
+        return <LoadingIndicator loadingState = {loadingState}/>;
+    }
 
     /**
      * This function prepares a new house to add.

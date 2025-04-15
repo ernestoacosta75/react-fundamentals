@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { House } from "../components/house-list/HouseList";
+import loadingStatus from "../helpers/loadingStatus";
 
 const useHouses = () => {
     /**
@@ -8,6 +9,7 @@ const useHouses = () => {
      * useState returns an array
      */
     const [houses, setHouses] = useState<House[]>([]);
+    const [loadingState, setLoadingState] = useState<string>(loadingStatus.isLoading);
     
     const counter = useRef(0);
 
@@ -18,9 +20,16 @@ const useHouses = () => {
      */
     useEffect(() => {
         const fetchHouses = async () => {
-            const response: Response = await fetch("https://localhost:4000/house");
-            const houses = (await response).json();
-            setHouses(await houses);
+            setLoadingState(loadingStatus.isLoading);
+
+            try {                
+                const response: Response = await fetch("https://localhost:4000/house");
+                const houses = (await response).json();
+                setHouses(await houses);
+                setLoadingState(loadingStatus.loaded);
+            } catch {
+                setLoadingState(loadingStatus.hasErrored);
+            }
         };
         fetchHouses();
         
@@ -29,7 +38,7 @@ const useHouses = () => {
         counter.current++;
     }, []);  
     
-    return {houses, setHouses};
+    return {houses, setHouses, loadingState};
 };
 
 export default useHouses;
