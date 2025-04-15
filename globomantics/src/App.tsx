@@ -9,6 +9,7 @@ function App() {
       <Banner>
         <div>Providing houses all over the world</div>
       </Banner>
+      
       <HouseList/>
     </>
   )
