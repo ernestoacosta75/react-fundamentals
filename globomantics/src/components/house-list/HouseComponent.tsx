@@ -1,7 +1,7 @@
 import currencyFormatter from "../../helpers/currencyFormatter";
 import { HouseProps } from "./house-row/HouseRow";
 
-const House = ({house}: HouseProps) => {
+const HouseComponent = ({house}: HouseProps) => {
     return (
         <div className="row">
             <div className="col-6">
@@ -33,4 +33,4 @@ const House = ({house}: HouseProps) => {
     );
 };
 
-export default House;
+export default HouseComponent;

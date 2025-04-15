@@ -1,13 +1,17 @@
 import currencyFormatter from "../../../helpers/currencyFormatter";
 import { House } from "../HouseList";
 
+/**
+ * HouseProps is meant for individual HouseRows or HouseComponent, where a specific house is involved.
+ */
 export interface HouseProps {
-    house: House
+    house: House,
+    selectHouse?: (h: House) => void;
 }
-const HouseRow = ({house}: HouseProps) => {
+const HouseRow = ({house, selectHouse}: HouseProps) => {
 
     return (
-        <tr>
+        <tr onClick={() => selectHouse?.(house)}>
         <td>{house.address}</td>
         <td>{house.country}</td>
         {house.price &&

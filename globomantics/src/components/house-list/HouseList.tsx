@@ -11,7 +11,14 @@ export interface House {
     description?: string;
 };
 
-const HouseList = () => {
+/**
+ * HouseList is its own component and needs its own props type
+ */
+export interface HouseListProps {
+    selectHouse: (house: House) => void;
+  }
+
+const HouseList = ({selectHouse}: HouseListProps) => {
     /**
      * Using the useState hook (a function).
      * Its first parameter is the initial value of the state.
@@ -86,7 +93,7 @@ const HouseList = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {houses.map(h => <HouseRow key={h.id} house={h}/>)}
+                    {houses.map(h => <HouseRow key={h.id} house={h} selectHouse={selectHouse}/>)}
                 </tbody>
             </table>
             <AddHouseButton onAddHouse={addHouse}/>
