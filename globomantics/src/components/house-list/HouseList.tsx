@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
 import HouseRow from "./house-row/HouseRow";
 import AddHouseButton from "./AddHouseButton";
+import useHouses from "../../hooks/useHouses";
 
 export interface House {
     id?: number;
@@ -19,32 +19,8 @@ export interface HouseListProps {
   }
 
 const HouseList = ({selectHouse}: HouseListProps) => {
-    /**
-     * Using the useState hook (a function).
-     * Its first parameter is the initial value of the state.
-     * useState returns an array
-     */
-    const [houses, setHouses] = useState<House[]>([]);
-    
-    const counter = useRef(0);
 
-    /**
-     * This effect runs only once when the component mounts (because of the empty [] dependency array).
-     * It fetches the current list of houses from the backend.
-     * Once the JSON is received, it updates the houses state.
-     */
-    useEffect(() => {
-        const fetchHouses = async () => {
-            const response: Response = await fetch("https://localhost:4000/house");
-            const houses = (await response).json();
-            setHouses(await houses);
-        };
-        fetchHouses();
-        
-        // When a reference type is passed to useRef, the ref hook guarantees that
-        // the same reference is returned in the current property across re-renders.
-        counter.current++;
-    }, []);
+    const {houses, setHouses} = useHouses();
 
     /**
      * This function prepares a new house to add.
