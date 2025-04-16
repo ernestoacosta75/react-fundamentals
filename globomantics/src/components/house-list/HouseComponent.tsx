@@ -21,7 +21,7 @@ const HouseComponent = ({house}: HouseProps) => {
                     <h3 className="col-12">{house.address}</h3>
                 </div>
                 <div className="row">
-                    <h2 className="themeFontColor col-12">
+                    <h2 className={`${house.price >= 500000 ? "text-primary col-12" : "themeFontColor col-12"}`}>
                         {currencyFormatter.format(house.price)}
                     </h2>
                 </div>

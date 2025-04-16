@@ -3,6 +3,7 @@ import AddHouseButton from "./AddHouseButton";
 import useHouses from "../../hooks/useHouses";
 import LoadingIndicator from "../loaders/LoadingIndicator";
 import loadingStatus from "../../helpers/loadingStatus";
+import ErrorBoundary from "../errors/ErrorBoundary";
 
 export interface House {
     id?: number;
@@ -60,26 +61,30 @@ const HouseList = ({selectHouse}: HouseListProps) => {
     };
 
     return (
-        <>
-            <div className="row mb-2">
-                <h5 className="themeFontColor text-center">
-                    Houses currently on the market
-                </h5>
-            </div>
-            <table className="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Address</th>
-                        <th>Country</th>
-                        <th>Asking Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {houses.map(h => <HouseRow key={h.id} house={h} selectHouse={selectHouse}/>)}
-                </tbody>
-            </table>
-            <AddHouseButton onAddHouse={addHouse}/>
-        </>
+        <ErrorBoundary fallback="Something went wrong!">
+            <>
+                <div className="row mb-2">
+                    <h5 className="themeFontColor text-center">
+                        Houses currently on the market
+                    </h5>
+                </div>
+                <table className="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Address</th>
+                            <th>Country</th>
+                            <th>Asking Price</th>
+                        </tr>
+                    </thead>
+                    <ErrorBoundary fallback="Error loading house rows!">
+                        <tbody>
+                            {houses.map(h => <HouseRow key={h.id} house={h} selectHouse={selectHouse}/>)}
+                        </tbody>
+                    </ErrorBoundary>
+                </table>
+                <AddHouseButton onAddHouse={addHouse}/>
+            </>
+        </ErrorBoundary>
     );
 };
 

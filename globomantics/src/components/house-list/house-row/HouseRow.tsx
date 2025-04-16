@@ -8,8 +8,7 @@ export interface HouseProps {
     house: House,
     selectHouse?: (h: House) => void;
 }
-const HouseRow = ({house, selectHouse}: HouseProps) => {
-
+const HouseRow = ({house, selectHouse}: HouseProps) => {    
     return (
         <tr onClick={() => selectHouse?.(house)}>
         <td>{house.address}</td>
